@@ -1,0 +1,10 @@
+---
+
+- name: "Upload index.html to {{ domain }}"
+  aws_s3: "bucket=www.{{ domain }} mode=put object=index.html src=roles/www.{{ domain }}/pages/index.html"
+
+- name: "Upload site.css to {{ domain }}"
+  aws_s3: "bucket=www.{{ domain }} mode=put object=site.css src=roles/www.{{ domain }}/pages/site.css"
+
+- name: "Upload background.jpg to {{ domain }}"
+  aws_s3: "bucket=www.{{ domain }} mode=put object=background.jpg src=roles/www.{{ domain }}/pages/background.jpg"

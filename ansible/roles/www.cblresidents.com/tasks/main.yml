@@ -1,0 +1,19 @@
+---
+
+- name: "Create {{ domain }} bucket"
+  s3_bucket: "name={{ domain }}"
+
+- name: "Create www.{{ domain }} bucket"
+  s3_bucket: "name=www.{{ domain }} policy={{ lookup('file', 'www.{{ domain }}.policy.json') }}"
+
+- name: "Configure {{ domain }} bucket for website redirect"
+  s3_website: "name={{ domain }} redirect_all_requests=www.{{ domain }} state=present"
+
+- name: "Configure www.{{ domain }} bucket for website hosting"
+  s3_website: "name=www.{{ domain }} state=present suffix=index.html"
+  register: s3bucket
+
+- name: "Configure DNS for www.{{ domain }}"
+  route53: "record=www.{{ domain }} state=present ttl=300 type=CNAME value=www.{{ domain }}.s3-website-{{ region }}.amazonaws.com. zone={{ domain }}"
+
+- include_tasks: index.html.yml

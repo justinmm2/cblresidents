@@ -1,0 +1,10 @@
+body {
+	background-image: url("background.jpg");
+	background-size: 100%;
+}
+
+.bigbox {
+	background-color: #ffffff;
+	margin: 40px 10% 10% 10%;
+	text-indent: 5px;
+}

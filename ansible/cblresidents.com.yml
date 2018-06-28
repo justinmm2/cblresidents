@@ -1,0 +1,10 @@
+---
+
+- hosts: local
+  connection: local
+  vars:
+    domain: "cblresidents.com"
+    region: "us-east-1"
+
+  roles:
+    - www.cblresidents.com
