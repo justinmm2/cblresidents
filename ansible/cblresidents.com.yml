@@ -4,6 +4,7 @@
   connection: local
   vars:
     domain: "cblresidents.com"
+    google_dns_verifier: "google-site-verification=2zjfArGrbWL20__Ey_hn09LQNlPSUxGAKtSMoxa84dE"
     region: "us-east-1"
 
   roles:

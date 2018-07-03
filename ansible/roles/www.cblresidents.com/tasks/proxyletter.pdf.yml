@@ -1,0 +1,4 @@
+---
+
+- name: "Upload proxyletter.pdf to {{ domain }}"
+  aws_s3: "bucket=www.{{ domain }} mode=put object=proxyletter.pdf src=roles/www.{{ domain }}/pages/proxyletter.pdf"

@@ -1,0 +1,7 @@
+---
+
+- name: "Upload feeanalysis.pdf to {{ domain }}"
+  aws_s3: "bucket=www.{{ domain }} mode=put object=feeanalysis.pdf src=roles/www.{{ domain }}/pages/feeanalysis.pdf"
+
+- name: "Upload feecalculations.pdf to {{ domain }}"
+  aws_s3: "bucket=www.{{ domain }} mode=put object=feecalculations.pdf src=roles/www.{{ domain }}/pages/feecalculations.pdf"

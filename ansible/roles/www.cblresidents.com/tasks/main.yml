@@ -13,7 +13,37 @@
   s3_website: "name=www.{{ domain }} state=present suffix=index.html"
   register: s3bucket
 
-- name: "Configure DNS for www.{{ domain }}"
+- name: "Configure DNS A record for {{ domain }}"
+  route53: "record={{ domain }} state=present ttl=300 type=A value=52.216.99.154 zone={{ domain }}"
+
+- name: "Configure DNS CNAME for www.{{ domain }}"
   route53: "record=www.{{ domain }} state=present ttl=300 type=CNAME value=www.{{ domain }}.s3-website-{{ region }}.amazonaws.com. zone={{ domain }}"
 
+- name: "Configure Google DNS verification TXT record for {{ domain }}"
+  route53:
+    record: "{{ domain }}"
+    state: present
+    ttl: 300
+    type: TXT
+    value: "\"{{ google_dns_verifier }}\""
+    zone: "{{ domain }}"
+
+- name: "Configure Google MX records for {{ domain }}"
+  route53:
+    record: "{{ domain }}"
+    state: present
+    ttl: 300
+    type: MX
+    value: [
+      "1 ASPMX.L.GOOGLE.COM.",
+      "5 ALT1.ASPMX.L.GOOGLE.COM.",
+      "5 ALT2.ASPMX.L.GOOGLE.COM.",
+      "10 ASPMX2.GOOGLEMAIL.COM.",
+      "10 ASPMX3.GOOGLEMAIL.COM."
+    ]
+    zone: "{{ domain }}"
+
 - include_tasks: index.html.yml
+- include_tasks: secretindex.html.yml
+- include_tasks: proxyletter.pdf.yml
+- include_tasks: financialpdfs.yml
