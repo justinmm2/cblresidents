@@ -4,4 +4,3 @@
   aws_s3: "bucket=www.{{ domain }} mode=put object={{ item }} src=roles/www.{{ domain }}/pages/{{ item }}"
   with_items:
     - "cbboard.html"
-    - "cbbuilding.html"
