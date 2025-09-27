@@ -46,3 +46,4 @@
 - include_tasks: index.html.yml
 - include_tasks: secretindex.html.yml
 - include_tasks: pdfs.yml
+- include_tasks: otherpages.yml
